@@ -19,8 +19,11 @@ import img3 from '../Assets/img3.jpg';
 import img4 from '../Assets/img4.jpg';
 import img5 from '../Assets/img5.jpg';
 import { Link } from 'react-router-dom';
-
+import { useContext } from 'react';
+import { AuthContext } from '../Context/AuthContext';
 export default function Login() {
+    const store = useContext(AuthContext);
+    console.log(store);
     const userStyles = makeStyles({
         text1: {
             color: "grey",
