@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
@@ -108,7 +107,7 @@ export default function SignUp() {
                             <Typography className={classes.text1} variant="subtitle1">
                                 Sign up to see photos and videos from your friends
                             </Typography>
-                            {error != "" && <Alert severity="error">{error}</Alert>}
+                            {error !== "" && <Alert severity="error">{error}</Alert>}
                             <TextField value={email} onChange={(e) => setEmail(e.target.value)} id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin="dense" size="small" />
                             <TextField value={pass} onChange={(e) => setPass(e.target.value)} id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin="dense" size="small" />
                             <TextField value={name} onChange={(e) => setName(e.target.value)} id="outlined-basic" label="Full Name" variant="outlined" fullWidth={true} margin="dense" size="small" />

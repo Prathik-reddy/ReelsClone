@@ -2,12 +2,11 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext,Image } from 'pure-react-carousel';
+import { CarouselProvider, Slider, Slide,Image } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { makeStyles } from '@mui/styles';
 import "./Login.css";
@@ -18,8 +17,8 @@ import img2 from '../Assets/img2.jpg';
 import img3 from '../Assets/img3.jpg';
 import img4 from '../Assets/img4.jpg';
 import img5 from '../Assets/img5.jpg';
-import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { Link,useNavigate } from 'react-router-dom';
+import { useContext ,useState} from 'react';
 import { AuthContext } from '../Context/AuthContext';
 export default function Login() {
     const store = useContext(AuthContext);
@@ -41,7 +40,28 @@ export default function Login() {
             marginTop: '2%'
         }
     })
+    const [email, setEmail] = useState("");
+    const [pass, setPass] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const {Login} = useContext(AuthContext);
     const classes = userStyles();
+
+    const handleClick = async() => {
+        try {
+            setError("");
+            setLoading(true);
+            Login(email,pass);
+            setLoading(false);
+            navigate("/");
+        } catch (error) {
+            setError(error);
+            setTimeout(() =>{
+                setError("");
+            }, 3000);
+        }
+    }
     return (
         <>
             <div className="login-wrapper">
@@ -64,15 +84,15 @@ export default function Login() {
                             <img src={insta} alt="" />
                         </div>
                         <CardContent>
-                            {true && <Alert severity="error">This is an error alert — check it out!</Alert>}
-                            <TextField id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin="dense" size="small" />
-                            <TextField id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin="dense" size="small" />
+                            {error!=="" && <Alert severity="error">{error}</Alert>}
+                            <TextField value={email} onChange={(e)=>setEmail(e.target.value)} id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin="dense" size="small" />
+                            <TextField  value={pass} onChange={(e)=>setPass(e.target.value)} id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin="dense" size="small" />
                             <Typography className={classes.text2} color="primary" variant="subtitle1">
                                 Forget Password ?
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button color="primary" fullWidth={true} variant="contained">
+                            <Button disabled = {loading} onClick = {handleClick} color="primary" fullWidth={true} variant="contained">
                                 Log in
                             </Button>
                         </CardActions>
