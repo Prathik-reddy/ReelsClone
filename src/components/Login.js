@@ -48,13 +48,22 @@ export default function Login() {
     const {Login} = useContext(AuthContext);
     const classes = userStyles();
 
-    const handleClick = async() => {
+    const handleClick = async(e) => {
+        e.preventDefault();
+        if(email === "" || pass===""){
+            setError("pls fill all details");
+            setTimeout(() =>{
+                setError("");
+            }, 3000);
+            return;
+        }
         try {
             setError("");
             setLoading(true);
             Login(email,pass);
             setLoading(false);
             navigate("/");
+            console.log('hdfk');
         } catch (error) {
             setError(error);
             setTimeout(() =>{

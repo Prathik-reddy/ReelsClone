@@ -10,6 +10,7 @@ import TextField from '@mui/material/TextField';
 import { makeStyles } from '@mui/styles';
 import insta from "../Assets/Instagram.jpg";
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import { database, storage } from '../firebase';
@@ -43,8 +44,8 @@ export default function SignUp() {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        if (file == null) {
-            setError("Pls upload a Profile Image to SignUp");
+        if (!(email||pass||name||file)) {
+            setError("Pls upload all details to SignUp");
             setTimeout(() => {
                 setError("");
             }, 3000)
@@ -111,10 +112,10 @@ export default function SignUp() {
                             <TextField value={email} onChange={(e) => setEmail(e.target.value)} id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin="dense" size="small" />
                             <TextField value={pass} onChange={(e) => setPass(e.target.value)} id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin="dense" size="small" />
                             <TextField value={name} onChange={(e) => setName(e.target.value)} id="outlined-basic" label="Full Name" variant="outlined" fullWidth={true} margin="dense" size="small" />
-                            <Button color="secondary" fullWidth={true} variant="outlined" margin="dense" startIcon={<CloudUploadIcon />} component="label">
+                            {!file?<Button color="secondary" fullWidth={true} variant="outlined" margin="dense" startIcon={<CloudUploadIcon />} component="label">
                                 Upload Profile Image
                                 <input type="file" accept="image/*" hidden onChange={(e) => setFile(e.target.files[0])} />
-                            </Button>
+                            </Button>:<Button color="secondary" fullWidth={true} variant="outlined" margin="dense" startIcon={<CheckCircleIcon />} component="label">Image Uploaded</Button>}
                         </CardContent>
                         <CardActions>
                             <Button disabled={loading} onClick={handleClick} color="primary" fullWidth={true} variant="contained">
