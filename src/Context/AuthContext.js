@@ -11,8 +11,10 @@ export function AuthProvider({children}){
         return auth.createUserWithEmailAndPassword(email, password);
     }
 
-    function Login (email, password){
-        return auth.signInWithEmailAndPassword(email, password);
+    async function Login (email, password){
+        const isUser =  await auth.signInWithEmailAndPassword(email, password);
+        console.log(isUser);
+        return isUser;
     }
 
     function Logout (){

@@ -37,6 +37,7 @@ export default function SignUp() {
     const [name, setName] = useState("");
     const [file, setFile] = useState(null);
     const [error, setError] = useState("");
+    const [text, setText] = useState("Image Uploaded");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const { SignUp } = useContext(AuthContext);
@@ -44,7 +45,7 @@ export default function SignUp() {
 
     const handleClick = async (e) => {
         e.preventDefault();
-        if (!(email||pass||name||file)) {
+        if (!(email && pass && name && file)) {
             setError("Pls upload all details to SignUp");
             setTimeout(() => {
                 setError("");
@@ -112,10 +113,21 @@ export default function SignUp() {
                             <TextField value={email} onChange={(e) => setEmail(e.target.value)} id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin="dense" size="small" />
                             <TextField value={pass} onChange={(e) => setPass(e.target.value)} id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin="dense" size="small" />
                             <TextField value={name} onChange={(e) => setName(e.target.value)} id="outlined-basic" label="Full Name" variant="outlined" fullWidth={true} margin="dense" size="small" />
-                            {!file?<Button color="secondary" fullWidth={true} variant="outlined" margin="dense" startIcon={<CloudUploadIcon />} component="label">
+                            {!file?<Button sx={{ mt: 1 }} color="secondary" fullWidth={true} variant="outlined"  startIcon={<CloudUploadIcon />} component="label">
                                 Upload Profile Image
                                 <input type="file" accept="image/*" hidden onChange={(e) => setFile(e.target.files[0])} />
-                            </Button>:<Button color="secondary" fullWidth={true} variant="outlined" margin="dense" startIcon={<CheckCircleIcon />} component="label">Image Uploaded</Button>}
+                            </Button>:
+                            <>
+                                <Button  sx={{ mt: 1 }} color="secondary" fullWidth={true} variant="outlined" margin="dense" startIcon={<CheckCircleIcon />} component="label">{text}</Button>
+                                <Button sx={{ mt: 2 }} color="secondary" fullWidth={true} variant="outlined"  startIcon={<CloudUploadIcon />} component="label">
+                                Upload Another Image
+                                <input type="file" accept="image/*" hidden onChange={(e) => {setFile(e.target.files[0])
+                                setText("New Image Uploaded")
+                                }} />
+                            </Button>
+
+                            </>
+                            }
                         </CardContent>
                         <CardActions>
                             <Button disabled={loading} onClick={handleClick} color="primary" fullWidth={true} variant="contained">

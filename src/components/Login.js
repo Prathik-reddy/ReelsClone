@@ -21,8 +21,8 @@ import { Link,useNavigate } from 'react-router-dom';
 import { useContext ,useState} from 'react';
 import { AuthContext } from '../Context/AuthContext';
 export default function Login() {
-    const store = useContext(AuthContext);
-    console.log(store);
+    // const store = useContext(AuthContext);
+    // console.log(store);
     const userStyles = makeStyles({
         text1: {
             color: "grey",
@@ -50,7 +50,7 @@ export default function Login() {
 
     const handleClick = async(e) => {
         e.preventDefault();
-        if(email === "" || pass===""){
+        if(email === "" && pass===""){
             setError("pls fill all details");
             setTimeout(() =>{
                 setError("");
@@ -60,10 +60,14 @@ export default function Login() {
         try {
             setError("");
             setLoading(true);
-            Login(email,pass);
+            const isUser = await Login(email,pass);
+            console.log(isUser);
+            if(isUser.status===400){
+                setError("Invalid Credentials");
+                return;
+            }
             setLoading(false);
             navigate("/");
-            console.log('hdfk');
         } catch (error) {
             setError(error);
             setTimeout(() =>{
@@ -96,12 +100,12 @@ export default function Login() {
                             {error!=="" && <Alert severity="error">{error}</Alert>}
                             <TextField value={email} onChange={(e)=>setEmail(e.target.value)} id="outlined-basic" label="Email" variant="outlined" fullWidth={true} margin="dense" size="small" />
                             <TextField  value={pass} onChange={(e)=>setPass(e.target.value)} id="outlined-basic" label="Password" variant="outlined" fullWidth={true} margin="dense" size="small" />
-                            <Typography className={classes.text2} color="primary" variant="subtitle1">
+                            <Typography sx={{mt:1}} className={classes.text2} color="primary" variant="subtitle1">
                                 Forget Password ?
                             </Typography>
                         </CardContent>
                         <CardActions>
-                            <Button disabled = {loading} onClick = {handleClick} color="primary" fullWidth={true} variant="contained">
+                            <Button  sx={{mt:-1}}disabled = {loading} onClick = {handleClick} color="primary" fullWidth={true} variant="contained">
                                 Log in
                             </Button>
                         </CardActions>
@@ -109,7 +113,7 @@ export default function Login() {
                     <Card variant="outlined" className={classes.card2}>
                         <CardContent>
                             <Typography className={classes.text1} variant="subtitle1">
-                                Don't have an account ? <Link to="/signup" style={{ textDecoration: 'none' }}>Signup</Link>
+                                Don't have an account ? <Link to="/signup" style={{ textDecoration: 'none', height:"4vh" }}>Signup</Link>
                             </Typography>
                         </CardContent>
                     </Card>

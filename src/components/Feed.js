@@ -5,7 +5,7 @@ import { deepOrange } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
 const Feed = () => {
     const {Logout , user} = useContext(AuthContext);
-    console.log(user);
+    // console.log(user);
     return (
         <div>
             <h1>Welcome to feed </h1>
