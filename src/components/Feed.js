@@ -1,19 +1,23 @@
-import React ,{useContext}from 'react'
+import React ,{useState,useContext,useEffect}from 'react'
 import { AuthContext } from '../Context/AuthContext'
-import Avatar from '@mui/material/Avatar';
-import { deepOrange } from '@mui/material/colors';
-import Stack from '@mui/material/Stack';
+import UploadFile from "./UploadFile";
+import {database} from '../firebase';
+
 const Feed = () => {
     const {Logout , user} = useContext(AuthContext);
-    // console.log(user);
+    console.log(user);
+    const [userData, setuserData] = useState("")
+    useEffect(() => {
+      const unsub = database.users.doc(user.uid).onSnapshot((snapshot)=>{
+        setuserData(snapshot.data())
+        console.log(snapshot.data());
+      })
+      return ()=>{unsub()}
+    }, [user])
+
     return (
-        <div>
-            <h1>Welcome to feed </h1>
-            <Stack direction="row" spacing={2}>
-            <Avatar>H</Avatar>
-            <Avatar sx={{ bgcolor: deepOrange[500] }}>{user.email[0].toUpperCase()}</Avatar>
-            </Stack>
-            <button onClick={Logout}>Logout</button>
+        <div style={{display: 'flex',justifyContent: 'center',alignItems: 'center',flexDirection: 'column'}}>
+                <UploadFile user = {userData}/>
         </div>
     )
 }
