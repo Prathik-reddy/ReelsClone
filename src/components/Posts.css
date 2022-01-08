@@ -15,3 +15,15 @@
     position: relative;
 }
 
+.fa{
+    position: absolute;
+    left : 10%;
+    bottom : 7%;
+}
+
+.fa h4{
+    margin : 0;
+    color : white;
+    padding : 3% 0;
+    margin-left: 20%;
+}
