@@ -25,5 +25,22 @@
     margin : 0;
     color : white;
     padding : 3% 0;
-    margin-left: 20%;
+    margin-left: 5%;
+    width: 20rem;
+}
+
+.icon-styling{
+    position: absolute;
+    bottom: 2%;
+    left: 13%;
+}
+
+.like{
+    cursor: pointer;
+    color : #e74c3c
+}
+
+.unlike{
+    cursor: pointer;
+    color: white;
 }

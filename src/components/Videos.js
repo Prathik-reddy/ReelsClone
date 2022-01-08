@@ -3,7 +3,6 @@ import  './Video.css';
 import ReactDOM from 'react-dom';
 
 const Videos = (props) => {
-    console.log(props);
     const handleClick = (e)=>{
         e.preventDefault();
         e.target.muted = !e.target.muted;

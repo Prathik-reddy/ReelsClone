@@ -4,9 +4,9 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Videos from './Videos'
 import  './Posts.css';
 import Avatar from '@mui/material/Avatar';
+import Like from "./Like";
 
 const Posts = ({userData}) => {
-    console.log("userp",userData);
     const [posts,setPosts] = useState(null);
 
     useEffect(()=>{
@@ -21,7 +21,6 @@ const Posts = ({userData}) => {
         })
         return unsub
     },[])
-
     return (
         <div>
             {
@@ -33,9 +32,11 @@ const Posts = ({userData}) => {
                                         <div className="videos">
                                             <Videos src={post.pUrl} id={post.pId}/>
                                             <div className="fa" style = {{display: 'flex'}}>
-                                                <Avatar sx={{ width: 50, height: 50 }} alt="User Avatar" src={post.profileUrl} />
+                                                <Avatar sx={{ width: 50, height: 50 }}
+                                                alt="User Avatar" src={post.uProfile}/>
                                                 <h4>{post.uName}</h4>
                                             </div>
+                                            <Like userData={userData} postData={post}/>
                                         </div>
                                     </React.Fragment>
                             ))
