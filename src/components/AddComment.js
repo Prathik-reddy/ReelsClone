@@ -16,14 +16,14 @@ const AddComment = ({userData,postData}) => {
                 comments:[...postData.comments,doc.id]
             })
         })
-        setText('')
+        setText('');
     }
     return (
         <div style={{width:'100%'}}>
             <TextField id="outlined-basic" label="Comment" variant="outlined" size="small" sx={{width:'70%'}} value={text} onChange={(e)=>setText(e.target.value)}/>
-            <Button variant="contained" onClick={handleClick}>Post</Button>
+            <Button style = {{margin:"0 1%"}} variant="contained" onClick={handleClick}>Post</Button>
         </div>
-        
+
     )
 }
 

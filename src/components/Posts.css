@@ -38,7 +38,7 @@
 
 .like{
     cursor: pointer;
-    color : #e74c3c
+    color : #e74c3c;
 }
 
 .unlike{
@@ -65,23 +65,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin :1rem  0;
 }
 
 .video-modal video{
-    height: 88vh;
+    height: 85vh;
 }
 
 .comment-modal{
     width: 50%;
     height: 100%;
+    padding : 0.5rem;
 }
 
 .unlike2{
     color: black;
     cursor: pointer;
+    padding : 0.5rem;
 }
 
 .card1{
-    height: 71vh;
-    padding : 1rem;
+    height: 66vh;
+    margin : 1rem;
+}
+.card2{
+    padding : 1rem 0;
+    margin : 1rem;
 }

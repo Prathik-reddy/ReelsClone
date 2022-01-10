@@ -65,9 +65,9 @@ const Posts = ({ userData }) => {
                                                         <Comments postData={post} />
                                                     </Card>
                                                     <Card variant="outlined" className="card2">
-                                                        <Typography style={{ padding: '0.4rem' }}>{post.likes.length === 0 ? 'Liked by nobody' : `Liked by ${post.likes.length} users`}</Typography>
+                                                        <Typography style={{ margin: '0.4rem' }}>{post.likes.length === 0 ? 'Liked by nobody' : `Liked by ${post.likes.length} users`}</Typography>
                                                         <div style={{ display: 'flex' }}>
-                                                            <Like2 postData={post} userData={userData} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} />
+                                                            <Like2 postData={post} userData={userData} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}} />
                                                             <AddComment style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }} userData={userData} postData={post} />
                                                         </div>
                                                     </Card>
