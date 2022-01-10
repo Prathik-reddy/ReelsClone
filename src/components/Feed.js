@@ -5,7 +5,7 @@ import {database} from '../firebase';
 import Posts from "./Posts";
 
 const Feed = () => {
-    const {Logout , user} = useContext(AuthContext);
+    const {user} = useContext(AuthContext);
     console.log(user);
     const [userData, setuserData] = useState(null);
     useEffect(() => {

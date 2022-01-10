@@ -1,8 +1,9 @@
 import React, { useState ,useEffect} from 'react'
-import CircularProgress from '@mui/material/CircularProgress';
 import Avatar from '@mui/material/Avatar';
 import {database} from '../firebase'
-
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import ChatBubble from '@material-ui/icons/ChatBubble';
 const Comments = ({postData}) => {
     const [comments, setComments] = useState([]);
     async function fetchComments(){
@@ -17,24 +18,31 @@ const Comments = ({postData}) => {
     useEffect(() =>{
             fetchComments();
     },[postData])
+
     return (
         <div>
         {
-            comments===null?
+            comments.length===0?
             <>
-            <h3>NO COMMENTS YET</h3>
-            {
-                console.log("commentssss" ,comments)
-            }
-            </>
-            :
+                <div style ={{display: 'flex',alignItems: 'center' ,justifyContent: 'center',flexDirection: 'column'}}>
+                    <h3>NO COMMENTS YET...</h3>
+                    <p>Be the first to post a comment on this video</p>
+                </div>
+            </>:
             <>
             {
                 comments.map((comment,index)=>(
-                    <div style={{display:'flex',padding : "1rem",}} key = {index}>
+                    <>
+                    <div style={{display:'flex',padding : "1rem"}} key = {index}>
                         <Avatar  src={comment.uProfileImage}/>
                         <p style = {{margin:"3% 0"}}>&nbsp;&nbsp;<span style={{fontWeight:'bold'}}>{comment.uName}</span>&nbsp;&nbsp; {comment.text}</p>
                     </div>
+                    <div  style={{display:'flex', alignItems: 'center', justifyContent: 'space-around'}} key = {index}>
+                        <ThumbUpIcon/>
+                        <ThumbDownIcon/>
+                        <ChatBubble/>
+                    </div>
+                    </>
                 ))
             }
             </>
