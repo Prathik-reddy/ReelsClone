@@ -89,7 +89,7 @@ const UploadFile = (props) => {
                         <input accept = "video/*" id = "upload-input" type="file" style={{display: "none"}} onChange={(e)=>{handleChange(e.target.files[0])}} />
 
                         <label htmlFor="upload-input">
-                            <Button variant="outlined"  color="secondary" component="span">
+                            <Button style = {{margin : "5rem 0 1rem 0"}}variant="outlined"  color="secondary" component="span">
                                 <CloudUploadIcon/>&nbsp; {upload}
                             </Button>
                         </label>

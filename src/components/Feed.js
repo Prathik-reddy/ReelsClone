@@ -3,6 +3,7 @@ import { AuthContext } from '../Context/AuthContext'
 import UploadFile from "./UploadFile";
 import {database} from '../firebase';
 import Posts from "./Posts";
+import Navbar from './Navbar';
 
 const Feed = () => {
     const {Logout , user} = useContext(AuthContext);
@@ -18,6 +19,7 @@ const Feed = () => {
 
     return (
       <>
+          <Navbar userData = {userData}/>
           <div style={{display: 'flex',justifyContent: 'center',alignItems: 'center',flexDirection: 'column'}}>
             <UploadFile user = {userData}/>
             <Posts userData = {userData}/>

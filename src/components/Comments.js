@@ -1,10 +1,10 @@
 import React, { useState ,useEffect} from 'react'
-import CircularProgress from '@mui/material/CircularProgress';
 import Avatar from '@mui/material/Avatar';
 import {database} from '../firebase'
 
 const Comments = ({postData}) => {
     const [comments, setComments] = useState([]);
+    console.log(postData.comments.length);
     async function fetchComments(){
         let arr = [];
         for(let i=0;i<postData.comments.length;i++){
@@ -17,12 +17,16 @@ const Comments = ({postData}) => {
     useEffect(() =>{
             fetchComments();
     },[postData])
+    // console.log(comments,comments.length);
     return (
         <div>
         {
-            comments===null?
+            comments.length===0?
             <>
-            <h3>NO COMMENTS YET</h3>
+            <div style={{margin : "2% 0",display: 'flex',justifyContent: 'center',alignItems: 'center',flexDirection:"column"}}>
+                <h3>NO COMMENTS YET</h3>
+                <p>Be the first to comment on this post</p>
+            </div>
             {
                 console.log("commentssss" ,comments)
             }

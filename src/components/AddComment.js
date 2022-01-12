@@ -20,8 +20,8 @@ const AddComment = ({userData,postData}) => {
     }
     return (
         <div style={{width:'100%'}}>
-            <TextField id="outlined-basic" label="Comment" variant="outlined" size="small" sx={{width:'70%'}} value={text} onChange={(e)=>setText(e.target.value)}/>
-            <Button style = {{margin:"0 1%"}} variant="contained" onClick={handleClick}>Post</Button>
+            <TextField id="outlined-basic" label="Comment" variant="outlined" size="small" sx={{width:'65%'}} value={text} onChange={(e)=>setText(e.target.value)}/>
+            <Button style = {{marginLeft:"3%"}} variant="contained" onClick={handleClick}>Post</Button>
         </div>
 
     )
