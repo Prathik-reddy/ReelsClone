@@ -4,6 +4,7 @@ import {AuthProvider} from "./Context/AuthContext";
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import Feed from './components/Feed';
+import Profile from './components/Profile';
 import PrivateRoute from './components/PrivateRoute';
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/Signup" element={<SignUp/>} />
           <Route path="/Login" element={<Login/>} />
+          <Route path="/Profile/:id" element={<Profile />}/>
           <Route  path="/" element={<PrivateRoute />}>
             <Route  path="/" element={<Feed />} />
           </Route>

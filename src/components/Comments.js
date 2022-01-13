@@ -33,17 +33,17 @@ const Comments = ({postData}) => {
             <>
             {
                 comments.map((comment,index)=>(
-                    <>
-                    <div style={{display:'flex',padding : "1rem"}} key = {index}>
-                        <Avatar  src={comment.uProfileImage}/>
-                        <p style = {{margin:"3% 0"}}>&nbsp;&nbsp;<span style={{fontWeight:'bold'}}>{comment.uName}</span>&nbsp;&nbsp; {comment.text}</p>
+                    <div key = {index}>
+                        <div style={{display:'flex',padding : "1rem"}} >
+                            <Avatar  src={comment.uProfileImage}/>
+                            <p style = {{margin:"3% 0"}}>&nbsp;&nbsp;<span style={{fontWeight:'bold'}}>{comment.uName}</span>&nbsp;&nbsp; {comment.text}</p>
+                        </div>
+                        <div  style={{display:'flex', alignItems: 'center', justifyContent: 'space-around'}}>
+                            <ThumbUpIcon/>
+                            <ThumbDownIcon/>
+                            <ChatBubble/>
+                        </div>
                     </div>
-                    <div  style={{display:'flex', alignItems: 'center', justifyContent: 'space-around'}} key = {index}>
-                        <ThumbUpIcon/>
-                        <ThumbDownIcon/>
-                        <ChatBubble/>
-                    </div>
-                    </>
                 ))
             }
             </>
