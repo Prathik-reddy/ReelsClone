@@ -1,3 +1,6 @@
+html {
+    scroll-behavior: smooth;
+}
 .video-container{
     height: 80vh;
     border-radius: 20px;
@@ -87,6 +90,7 @@
 .card1{
     height: 66vh;
     margin : 1rem;
+    padding : 0.5rem;
 }
 .card2{
     padding : 1rem 0;

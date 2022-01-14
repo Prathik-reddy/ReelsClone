@@ -12,10 +12,13 @@ import Typography from '@mui/material/Typography';
 import Like2 from './Like2';
 import AddComment from './AddComment';
 import Comments from './Comments'
+import {useNavigate} from 'react-router-dom';
 
 const Posts = ({ userData }) => {
     const [posts, setPosts] = useState(null);
     const [open, setOpen] = useState(null);
+    const navigate = useNavigate();
+
     const handleClickOpen = (id) => {
         setOpen(id);
     };
@@ -23,6 +26,9 @@ const Posts = ({ userData }) => {
     const handleClose = () => {
         setOpen(null);
     };
+    const handleAvatarClick = () => {
+        navigate(`profile/${userData.userId}`);
+    }
 
     useEffect(() => {
         let parr = []
@@ -36,6 +42,28 @@ const Posts = ({ userData }) => {
         })
         return unsub
     }, [])
+
+    const callback = (entries) => {
+        entries.forEach((entry)=>{
+            let ele = entry.target.childNodes[0]
+            console.log(ele)
+            ele.play().then(()=>{
+                if(!ele.paused && !entry.isIntersecting){
+                    ele.pause()
+                }
+            })
+        })
+    }
+    let observer = new IntersectionObserver(callback, {threshold:0.6});
+    useEffect(()=>{
+        const elements = document.querySelectorAll(".videos")
+        elements.forEach((element)=>{
+            observer.observe(element)
+        })
+        return ()=>{
+            observer.disconnect();
+        }
+    },[posts])
     return (
         <div>
             {
@@ -48,7 +76,7 @@ const Posts = ({ userData }) => {
                                         <Videos src={post.pUrl} id={post.pId} />
                                         <div className="fa" style={{ display: 'flex' }}>
                                             <Avatar sx={{ width: 50, height: 50 }}
-                                                alt="User Avatar" src={post.uProfile} />
+                                                alt="User Avatar" src={post.uProfile} onClick={handleAvatarClick} />
                                             <h4>{post.uName}</h4>
                                         </div>
                                         <Like userData={userData} postData={post} />
@@ -61,7 +89,7 @@ const Posts = ({ userData }) => {
                                                     </video>
                                                 </div>
                                                 <div className="comment-modal">
-                                                    <Card className="card1">
+                                                    <Card className="card1" style={{overflow: 'scroll'}}>
                                                         <Comments postData={post} />
                                                     </Card>
                                                     <Card variant="outlined" className="card2">

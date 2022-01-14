@@ -62,7 +62,7 @@ const UploadFile = (props) => {
                     createdAt : database.getTimeStamp(),
                 }
                 database.posts.add(obj).then(async(ref)=>{
-                    let res =await database.users.doc(props.user.userId).update({
+                        await database.users.doc(props.user.userId).update({
                         postIds : props.user.postIds != null ? [...props.user.postIds,ref.id]:[ref.id]
                     })
                 }).then(() => {
@@ -93,7 +93,7 @@ const UploadFile = (props) => {
                                 <CloudUploadIcon/>&nbsp; {upload}
                             </Button>
                         </label>
-                        {loading?<LinearProgress color="secondary"  style={{marginTop:'3%'}} />:""}
+                        {loading?<LinearProgress color="secondary"  style={{margin:'5% 0'}} />:""}
                     </>
                 )
             }

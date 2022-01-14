@@ -16,8 +16,7 @@ const Videos = (props) => {
         }
     }
     return (
-           <video src ={props.src} id={props.id}  className="videos-styling"  muted = "muted" onClick = {handleClick}  onEnded = {handleScroll}>
-
+           <video src ={props.src} id={props.id}  className="videos-styling"  muted = "muted" onClick = {handleClick}  onEnded = {handleScroll} autoPlay = {true}>
            </video>
     )
 }
